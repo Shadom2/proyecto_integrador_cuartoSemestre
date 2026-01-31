@@ -128,7 +128,6 @@ class StudentServiceTest {
         )
 
         `when`(studentRepository.findById(1L)).thenReturn(Optional.of(student))
-        `when`(studentRepository.existsByEmail("pablo@test.com")).thenReturn(true)
         `when`(studentRepository.save(any<Student>())).thenReturn(student)
 
         val result = studentService.update(1L, updatedRequest)

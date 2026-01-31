@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "uniwork-notifier-api",
+		"name": "Uniwork Notifier API",
+		"description": "Colección completa de endpoints para el API REST del proyecto integrador Uniwork Notifier.\n\n## Relaciones entre entidades:\n- Student (1) → (N) Task\n- Task (1) → (N) SubTask\n\n## Tecnologías:\n- Kotlin + Spring Boot\n- PostgreSQL (Docker)\n- JPA + Hibernate\n\n## Base URL:\nhttp://localhost:8080/api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Get All Students",
+					"requ<br>est": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students",
+							"host": ["{{base_url}}"],
+							"path": ["students"]
+						},
+						"description": "Retorna la lista completa de estudiantes registrados"
+					},
+					"response": [
+						{
+							"name": "Success Example",
+							"originalRequest": {
+								"method": "GET",
+								"url": "{{base_url}}/students"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [{"key": "Content-Type", "value": "application/json"}],
+							"body": "[\n  {\n    \"id\": 1,\n    \"firstName\": \"Pablo\",\n    \"lastName\": \"Brito\",\n    \"email\": \"pablo@test.com\",\n    \"createdAt\": \"2024-01-01T10:00:00\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Student by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/:id",
+							"host": ["{{base_url}}"],
+							"path": ["students", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del estudiante"
+								}
+							]
+						},
+						"description": "Obtiene un estudiante específico por su ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Pablo\",\n  \"lastName\": \"Brito\",\n  \"email\": \"pablo@test.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/students",
+							"host": ["{{base_url}}"],
+							"path": ["students"]
+						},
+						"description": "Crea un nuevo estudiante. El email debe ser único."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Pablo\",\n  \"lastName\": \"Brito Actualizado\",\n  \"email\": \"pablo.nuevo@test.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/students/:id",
+							"host": ["{{base_url}}"],
+							"path": ["students", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Actualiza un estudiante existente."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/:id",
+							"host": ["{{base_url}}"],
+							"path": ["students", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Elimina un estudiante por ID (eliminación física)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": ["{{base_url}}"],
+							"path": ["tasks"]
+						},
+						"description": "Retorna todas las tareas"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["tasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtiene una tarea por ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks by Student ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/student/:studentId",
+							"host": ["{{base_url}}"],
+							"path": ["tasks", "student", ":studentId"],
+							"variable": [
+								{
+									"key": "studentId",
+									"value": "1",
+									"description": "ID del estudiante"
+								}
+							]
+						},
+						"description": "Obtiene todas las tareas de un estudiante específico (endpoint con relación)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Proyecto Final\",\n  \"description\": \"Desarrollo del backend\",\n  \"dueDate\": \"2024-12-31T23:59:59\",\n  \"priority\": \"HIGH\",\n  \"status\": null,\n  \"studentId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": ["{{base_url}}"],
+							"path": ["tasks"]
+						},
+						"description": "Crea una nueva tarea. Priority: HIGH, MEDIUM, LOW. Status es opcional (default: PENDING)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Proyecto Final Actualizado\",\n  \"description\": \"Desarrollo completo del backend\",\n  \"dueDate\": \"2024-12-31T23:59:59\",\n  \"priority\": \"MEDIUM\",\n  \"status\": \"IN_PROGRESS\",\n  \"studentId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["tasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Actualiza una tarea. Status: PENDING, IN_PROGRESS, COMPLETED"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["tasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Elimina una tarea por ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubTasks",
+			"item": [
+				{
+					"name": "Get All SubTasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subtasks",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks"]
+						},
+						"description": "Retorna todas las subtareas"
+					},
+					"response": []
+				},
+				{
+					"name": "Get SubTask by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subtasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtiene una subtarea por ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get SubTasks by Task ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subtasks/task/:taskId",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks", "task", ":taskId"],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": "1",
+									"description": "ID de la tarea padre"
+								}
+							]
+						},
+						"description": "Obtiene todas las subtareas de una tarea específica (endpoint con relación)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create SubTask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Crear entidades JPA\",\n  \"description\": \"Implementar las 3 entidades del proyecto\",\n  \"status\": null,\n  \"taskId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/subtasks",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks"]
+						},
+						"description": "Crea una nueva subtarea. Status es opcional (default: PENDING)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update SubTask",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Crear entidades JPA\",\n  \"description\": \"Implementar y probar las 3 entidades\",\n  \"status\": \"COMPLETED\",\n  \"taskId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/subtasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Actualiza una subtarea. Status: PENDING, IN_PROGRESS, COMPLETED"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SubTask",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subtasks/:id",
+							"host": ["{{base_url}}"],
+							"path": ["subtasks", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Elimina una subtarea por ID"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		}
+	]
+}

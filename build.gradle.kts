@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "4.0.2"
 	id("io.spring.dependency-management") version "1.1.7"
 	kotlin("plugin.jpa") version "2.2.21"
+	id("jacoco")
 }
 
 group = "com.uniwork"
@@ -49,3 +50,44 @@ allOpen {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+jacoco {
+	toolVersion = "0.8.11"
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+		csv.required.set(false)
+	}
+	classDirectories.setFrom(
+		files(classDirectories.files.map {
+			fileTree(it) {
+				// Excluir todo excepto las clases Service
+				include("**/service/**")
+			}
+		})
+	)
+}
+
+tasks.jacocoTestCoverageVerification {
+	dependsOn(tasks.jacocoTestReport)
+	violationRules {
+		rule {
+			element = "CLASS"
+			includes = listOf("com.uniwork.notifier.service.*")
+			limit {
+				counter = "LINE"
+				value = "COVEREDRATIO"
+				minimum = "1.0".toBigDecimal() // 100% coverage requerido
+			}
+		}
+	}
+}
+
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport)
+}
+
