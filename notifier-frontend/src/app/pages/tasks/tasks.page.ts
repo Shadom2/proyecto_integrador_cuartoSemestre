@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {
-    IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonText,
+    IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonButtons, IonIcon, IonText,
     IonSegment, IonSegmentButton, IonLabel, IonCard, IonCardHeader,
     IonCardTitle, IonCardContent, IonBadge, IonFab, IonFabButton,
     IonRefresher, IonRefresherContent, ToastController, AlertController
@@ -23,7 +23,7 @@ import { TaskResponse, StudentResponse, Status } from '../../models';
         CommonModule,
         FormsModule,
         RouterLink,
-        IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonText,
+        IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonButtons, IonIcon, IonText,
         IonSegment, IonSegmentButton, IonLabel, IonCard, IonCardHeader,
         IonCardTitle, IonCardContent, IonBadge, IonFab, IonFabButton,
         IonRefresher, IonRefresherContent
