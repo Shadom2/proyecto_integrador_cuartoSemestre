@@ -22,11 +22,15 @@ class StudentController(private val studentService: StudentService) {
         return ResponseEntity.ok(studentService.findById(id))
     }
 
+    // POST endpoint removido - Los estudiantes solo se crean a través de /auth/register
+    // para asegurar que siempre tengan password hasheado
+    /*
     @PostMapping
     fun create(@Valid @RequestBody request: StudentRequest): ResponseEntity<StudentResponse> {
         val created = studentService.create(request)
         return ResponseEntity.status(HttpStatus.CREATED).body(created)
     }
+    */
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @Valid @RequestBody request: StudentRequest): ResponseEntity<StudentResponse> {

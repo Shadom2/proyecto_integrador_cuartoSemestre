@@ -1,0 +1,172 @@
+ion-content {
+    --background: #f8f9fa;
+}
+
+.welcome-section {
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
+    color: white;
+    padding: 32px 20px;
+    text-align: center;
+
+    h2 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.9;
+    }
+}
+
+.status-filter {
+    margin: 16px;
+    --background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 4px;
+
+    ion-segment-button {
+        // Estados usando las variables CSS de Ionic que penetran Shadow DOM
+        --color: #333333; // Texto SIEMPRE negro
+        --color-checked: #333333 !important; // Texto SIEMPRE negro (activo también)
+        --background: transparent; // Sin fondo
+        --background-checked: transparent !important; // Sin fondo cuando está activo
+        --indicator-color: var(--ion-color-primary) !important; // SUBRAYADO azul
+        --indicator-height: 3px; // Línea delgada debajo
+        --border-radius: 8px;
+        font-weight: 500;
+        font-size: 13px;
+        min-height: 36px;
+        text-transform: none;
+        transition: all 0.3s ease;
+
+        ion-label {
+            margin: 8px 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #333333 !important; // SIEMPRE NEGRO
+        }
+
+        // Estado activo - solo más negrita (sin cambio de color)
+        &.segment-button-checked {
+            font-weight: 700;
+
+            ion-label {
+                color: #333333 !important; // NEGRO (no blanco)
+                font-weight: 700;
+            }
+        }
+
+        // Estado inactivo - texto NEGRO OSCURO
+        &:not(.segment-button-checked) {
+            ion-label {
+                color: #333333 !important; // NEGRO OSCURO (antes era #999 muy claro)
+                font-weight: 600; // Más negrita
+            }
+        }
+    }
+}
+
+.tasks-list {
+    padding: 0 16px 80px;
+}
+
+.task-card {
+    margin-bottom: 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+
+    ion-card-title {
+        flex: 1;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+    }
+}
+
+.priority-badge {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 10px;
+}
+
+.task-description {
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    margin: 0 0 16px;
+    line-height: 1.5;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .due-date {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--ion-color-medium);
+
+        ion-icon {
+            font-size: 16px;
+        }
+
+        &.overdue {
+            color: var(--ion-color-danger);
+            font-weight: 600;
+        }
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+
+    .empty-icon {
+        font-size: 80px;
+        color: var(--ion-color-light-shade);
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+        color: var(--ion-color-medium);
+        margin: 0 0 8px;
+    }
+
+    p {
+        font-size: 15px;
+        color: var(--ion-color-medium);
+        margin: 0;
+    }
+}
+
+ion-fab-button {
+    --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

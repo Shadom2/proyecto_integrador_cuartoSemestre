@@ -38,3 +38,62 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### Angular/Ionic Frontend ###
+**/node_modules/
+**/dist/
+**/.angular/
+**/www/
+**/platforms/
+**/plugins/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Ionic Storage
+**/.ionic/
+
+# Environment files (CRITICAL - contienen secrets)
+**/environment.prod.ts
+**/environment.development.ts
+# Mantener environment.ts para desarrollo local
+
+# Testing
+**/coverage/
+**/.nyc_output/
+**/e2e/results/
+**/screenshots/
+
+# Build outputs
+**/build/
+**/tmp/
+**/temp/
+
+### Database ###
+*.db
+*.sqlite
+*.sqlite3
+
+### OS ###
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+### Logs ###
+logs/
+*.log
+
+### Secrets & Credentials ###
+*.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+secrets/
+credentials/

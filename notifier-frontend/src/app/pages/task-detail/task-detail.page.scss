@@ -1,0 +1,132 @@
+ion-content {
+    --background: #f8f9fa;
+}
+
+.detail-container {
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.main-card {
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.header-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    ion-badge {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 6px 10px;
+    }
+}
+
+.description {
+    color: var(--ion-color-medium);
+    line-height: 1.6;
+    margin: 0 0 20px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--ion-color-light);
+    border-radius: 12px;
+
+    ion-icon {
+        font-size: 24px;
+        color: var(--ion-color-primary);
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+            font-size: 12px;
+            color: var(--ion-color-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ion-color-dark);
+        }
+    }
+}
+
+.subtasks-section {
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ion-color-dark);
+        }
+    }
+
+    ion-list {
+        background: transparent;
+    }
+}
+
+.subtask-item {
+    --background: white;
+    --border-radius: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+        margin: 0 0 4px;
+    }
+
+    p {
+        font-size: 13px;
+        color: var(--ion-color-medium);
+        margin: 0;
+    }
+}
+
+.empty-subtasks {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 12px;
+
+    ion-icon {
+        font-size: 60px;
+        color: var(--ion-color-light-shade);
+        margin-bottom: 12px;
+    }
+
+    p {
+        color: var(--ion-color-medium);
+        margin: 0;
+    }
+}

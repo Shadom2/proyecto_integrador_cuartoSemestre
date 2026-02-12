@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Mis Tareas</ion-title>
+        <ion-button slot="end" fill="clear" (click)="logout()">
+            <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="loadTasks($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- Header con bienvenida -->
+    <div class="welcome-section">
+        <h2>Hola, {{ currentUser?.firstName }}! 👋</h2>
+        <p>Tienes {{ tasks.length }} tareas en total</p>
+    </div>
+
+
+    <!-- Filtros por estado -->
+    <ion-segment [(ngModel)]="selectedFilter" (ionChange)="onFilterChange($event)" class="status-filter" mode="md"
+        color="primary">
+        <ion-segment-button value="ALL">
+            <ion-label>Todas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="PENDING">
+            <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="IN_PROGRESS">
+            <ion-label>En Progreso</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="COMPLETED">
+            <ion-label>Completadas</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <!-- Lista de tareas -->
+    <div class="tasks-list">
+        <ion-card *ngFor="let task of filteredTasks" [routerLink]="['/tasks', task.id]" class="task-card">
+            <ion-card-header>
+                <div class="task-header">
+                    <ion-card-title>{{ task.title }}</ion-card-title>
+                    <ion-badge [color]="getPriorityColor(task.priority)" class="priority-badge">
+                        {{ task.priority }}
+                    </ion-badge>
+                </div>
+            </ion-card-header>
+
+            <ion-card-content>
+                <p class="task-description" *ngIf="task.description">{{ task.description }}</p>
+
+                <div class="task-footer">
+                    <div class="due-date" [class.overdue]="isTaskOverdue(task.dueDate) && task.status !== 'COMPLETED'">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        <span>{{ task.dueDate | date:'dd/MM/yyyy HH:mm' }}</span>
+                    </div>
+                    <ion-badge [color]="getStatusColor(task.status)">
+                        {{ getStatusLabel(task.status) }}
+                    </ion-badge>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- Estado vacío -->
+        <div *ngIf="filteredTasks.length === 0" class="empty-state">
+            <ion-icon name="checkmark-circle-outline" class="empty-icon"></ion-icon>
+            <h3>No hay tareas {{ selectedFilter === 'ALL' ? '' : 'en este estado' }}</h3>
+            <p>Crea una nueva tarea para comenzar</p>
+        </div>
+    </div>
+
+    <!-- FAB para crear tarea -->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button routerLink="/tasks/new" color="secondary">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

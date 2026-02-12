@@ -20,6 +20,9 @@ open class Student(
     @Column(name = "email", nullable = false, unique = true, length = 100)
     open var email: String,
 
+    @Column(name = "password", nullable = false)
+    open var password: String, // Hasheada con BCrypt
+
     @Column(name = "created_at", nullable = false, updatable = false)
     open val createdAt: LocalDateTime = LocalDateTime.now()
 ) {

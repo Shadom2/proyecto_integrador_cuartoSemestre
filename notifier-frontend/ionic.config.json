@@ -1,0 +1,7 @@
+{
+  "name": "notifier-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

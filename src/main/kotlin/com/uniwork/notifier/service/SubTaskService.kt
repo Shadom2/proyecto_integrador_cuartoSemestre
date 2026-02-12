@@ -53,7 +53,6 @@ class SubTaskService(
 
         val task = taskRepository.findById(request.taskId)
             .orElseThrow { RuntimeException("Tarea no encontrada con ID: ${request.taskId}") }
-
         subTask.title = request.title
         subTask.description = request.description
         subTask.status = if (request.status != null) Status.valueOf(request.status.uppercase()) else subTask.status

@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="goBack()">
+                <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Detalle de Tarea</ion-title>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/tasks/edit', task?.id]">
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteTask()">
+                <ion-icon name="trash-outline" slot="icon-only" color="danger"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="detail-container" *ngIf="task">
+        <!-- Información principal -->
+        <ion-card class="main-card">
+            <ion-card-header>
+                <div class="header-badges">
+                    <ion-badge [color]="getPriorityColor(task.priority)">
+                        {{ task.priority }}
+                    </ion-badge>
+                    <ion-badge [color]="getStatusColor(task.status)">
+                        {{ getStatusLabel(task.status) }}
+                    </ion-badge>
+                </div>
+                <ion-card-title>{{ task.title }}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                <p class="description" *ngIf="task.description">
+                    {{ task.description }}
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        <div>
+                            <span class="label">Vencimiento</span>
+                            <span class="value">{{ task.dueDate | date:'dd/MM/yyyy HH:mm' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <ion-icon name="time-outline"></ion-icon>
+                        <div>
+                            <span class="label">Creada</span>
+                            <span class="value">{{ task.createdAt | date:'dd/MM/yyyy' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- Subtareas -->
+        <div class="subtasks-section">
+            <div class="section-header">
+                <h3>Subtareas</h3>
+                <ion-badge color="primary">{{ subtasks.length }}</ion-badge>
+            </div>
+
+            <ion-list *ngIf="subtasks.length > 0">
+                <ion-item *ngFor="let subtask of subtasks" class="subtask-item">
+                    <ion-checkbox slot="start" [checked]="subtask.status === 'COMPLETED'" disabled></ion-checkbox>
+                    <ion-label>
+                        <h3>{{ subtask.title }}</h3>
+                        <p *ngIf="subtask.description">{{ subtask.description }}</p>
+                    </ion-label>
+                    <ion-badge slot="end" [color]="getStatusColor(subtask.status)">
+                        {{ getStatusLabel(subtask.status) }}
+                    </ion-badge>
+                </ion-item>
+            </ion-list>
+
+            <div *ngIf="subtasks.length === 0" class="empty-subtasks">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>No hay subtareas para esta tarea</p>
+            </div>
+        </div>
+    </div>
+</ion-content>

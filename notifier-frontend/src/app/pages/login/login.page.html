@@ -1,0 +1,63 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    <!-- Logo y título -->
+    <div class="header-section">
+      <div class="logo-container">
+        <ion-icon name="checkmark-circle" class="logo-icon"></ion-icon>
+      </div>
+      <h1 class="app-title">UniWork Notifier</h1>
+      <p class="app-subtitle">Gestiona tus tareas universitarias</p>
+    </div>
+
+    <!-- Formulario de login -->
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title>Iniciar Sesión</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <!-- Email -->
+          <ion-item lines="none" class="form-item">
+            <ion-icon name="mail-outline" slot="start" class="input-icon"></ion-icon>
+            <ion-input type="email" formControlName="email" placeholder="Tu correo aquí"
+              autocomplete="email"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <ion-text color="danger">
+              <small *ngIf="loginForm.get('email')?.hasError('required')">El email es requerido</small>
+              <small *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</small>
+            </ion-text>
+          </div>
+
+          <!-- Password -->
+          <ion-item lines="none" class="form-item">
+            <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+            <ion-input type="password" formControlName="password" placeholder="Tu contraseña aquí"
+              autocomplete="current-password"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <ion-text color="danger">
+              <small *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es requerida</small>
+              <small *ngIf="loginForm.get('password')?.hasError('minlength')">Mínimo 6 caracteres</small>
+            </ion-text>
+          </div>
+
+          <!-- Botón de login -->
+          <ion-button expand="block" type="submit" class="login-button" [disabled]="isLoading">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            Iniciar Sesión
+          </ion-button>
+        </form>
+
+        <!-- Link a registro -->
+        <div class="register-link">
+          <ion-text color="medium">
+            ¿No tienes cuenta?
+          </ion-text>
+          <a routerLink="/register" class="link-text">Regístrate aquí</a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

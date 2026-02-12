@@ -24,16 +24,6 @@ class StudentService(private val studentRepository: StudentRepository) {
     }
 
     @Transactional
-    fun create(request: StudentRequest): StudentResponse {
-        if (studentRepository.existsByEmail(request.email)) {
-            throw RuntimeException("Ya existe un estudiante con ese email")
-        }
-        val student = request.toEntity()
-        val saved = studentRepository.save(student)
-        return saved.toResponse()
-    }
-
-    @Transactional
     fun update(id: Long, request: StudentRequest): StudentResponse {
         val student = studentRepository.findById(id)
             .orElseThrow { RuntimeException("Estudiante no encontrado con ID: $id") }
